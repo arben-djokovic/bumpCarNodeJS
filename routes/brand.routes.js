@@ -12,4 +12,17 @@ router.get("/brands", async(req, res) => {
     }
 })
 
+router.post("/brands", async(req, res) => {
+    try{
+        const brand = new Brand({
+            name: req.body.name
+        })
+        await brand.save()
+        res.json(brand)
+    }catch(err){
+        res.status(500).json({ message: "Error", error: err.message });
+        console.log(err)
+    }
+})
+
 module.exports = router;
