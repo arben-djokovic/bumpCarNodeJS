@@ -40,7 +40,8 @@ router.patch("/locations/:id", async(req, res) => {
             },
             {
                 new: true,
-                omitUndefined: true
+                omitUndefined: true,
+                runValidators: true
             }
         )
         
