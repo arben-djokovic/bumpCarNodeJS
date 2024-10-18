@@ -8,6 +8,7 @@ const Car = require('./models/Car');
 const City = require('./models/City');
 const Brand = require('./models/Brand');
 const CityRoutes = require('./routes/city.routes');
+const BrandRoutes = require('./routes/brand.routes');
 
 const mongoURI = process.env.MONGODB_URI;
 app.use(cors());
@@ -24,6 +25,7 @@ mongoose.connect(mongoURI, {
 .catch(err => console.log('Error connecting to MongoDB:', err));
 
 app.use(CityRoutes)
+app.use(BrandRoutes)
 
 
 
