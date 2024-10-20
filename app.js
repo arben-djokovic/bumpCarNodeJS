@@ -9,6 +9,7 @@ const City = require('./models/City');
 const Brand = require('./models/Brand');
 const CityRoutes = require('./routes/city.routes');
 const BrandRoutes = require('./routes/brand.routes');
+const ColorRoutes = require('./routes/color.routes');
 
 const mongoURI = process.env.MONGODB_URI;
 app.use(cors());
@@ -26,6 +27,7 @@ mongoose.connect(mongoURI, {
 
 app.use(CityRoutes)
 app.use(BrandRoutes)
+app.use(ColorRoutes)
 
 
 
