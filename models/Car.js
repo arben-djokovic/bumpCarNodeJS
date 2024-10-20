@@ -24,9 +24,8 @@ const carSchema = new mongoose.Schema({
         required: true  
     },
     model: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Model',
-        required: true  
+        type: String,
+        required: true
     },
     year: {
         type: Number,
@@ -39,7 +38,7 @@ const carSchema = new mongoose.Schema({
     },
     exteriorColor: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ExteriorColor',
+        ref: 'Color',
         required: true 
     },
     passengerCapacity: {
