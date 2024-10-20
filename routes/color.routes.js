@@ -23,9 +23,10 @@ router.post("/colors", async(req, res) => {
     }
 })
 
-router.delete("/colors", async(req, res) => {
+router.delete("/colors:id", async(req, res) => {
     try{
         const color = await Color.findByIdAndDelete(req.params.id) 
+        if(!color) return res.status(404).json({ message: "Color not found" });
         res.json(color)
     }catch(err){
         res.status(500).json({ message: "Error", error: err.message });
