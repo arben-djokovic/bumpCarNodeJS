@@ -95,4 +95,17 @@ router.patch("/brands/:id/remove-model", async(req, res) => {
     }
 })
 
+router.get("/brands/models/:brandid", async(req, res) => {
+    try{
+       const brand = await Brand.findById(req.params.brandid)
+       if (!brand) {
+        return res.status(404).json({ message: "Brand not found" });
+       }
+       res.json({models: brand.models})
+    }catch(err){
+        res.status(500).json({ message: "Error", error: err.message });
+        console.log(err)
+    }
+})
+
 module.exports = router;
