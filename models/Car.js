@@ -10,13 +10,13 @@ const carSchema = new mongoose.Schema({
     condition: {
         type: String,
         required: true,
-        enum: ['new', 'used'],
+        enum: ['New', 'Used'],
         message: '{VALUE} is not supported'
     },
     body_type: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'BodyType',
-        required: true  
+        required: true
     },
     brand: {
         type: mongoose.Schema.Types.ObjectId,
@@ -29,19 +29,21 @@ const carSchema = new mongoose.Schema({
     },
     year: {
         type: Number,
-        required: true
+        required: true,
+        minLength: 4,
+        maxLength: 4
     },
     city: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'City',
         required: true 
     },
-    exteriorColor: {
+    color: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Color',
         required: true 
     },
-    passengerCapacity: {
+    passenger_capacity: {
         type: Number,
         required: true
     },
@@ -56,7 +58,7 @@ const carSchema = new mongoose.Schema({
     features: {
         type: [String]
     },
-    fuelType: {
+    fuel_type: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'FuelType',
         required: true 
@@ -72,10 +74,10 @@ const carSchema = new mongoose.Schema({
     },
     drivetrain: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Drivetrain',
+        ref: 'DriveTrain',
         required: true 
     },
-    engineCapacity: {
+    engine_capacity: {
         type: Number,
         required: true
     },
@@ -84,21 +86,17 @@ const carSchema = new mongoose.Schema({
         required: true
     },
     length: {
-        type: Number,
-        required: true
+        type: Number
     },
     width: {
-        type: Number,
-        required: true
+        type: Number
     },
     height: {
-        type: Number,
-        required: true
+        type: Number
     },
-    cargoVolume: {
-        type: Number,
-        required: true
-    },
+    cargo_volume: {
+        type: Number
+    }
 
 });
 

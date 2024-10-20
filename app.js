@@ -2,23 +2,22 @@ const express = require('express');
 const { default: mongoose } = require('mongoose');
 require("dotenv").config()
 const app = express();
-const { ServerApiVersion, ObjectId } = require('mongodb');
-const cors = require('cors'); // Import CORS package
-const Car = require('./models/Car');
-const City = require('./models/City');
-const Brand = require('./models/Brand');
+const { ServerApiVersion } = require('mongodb');
+const cors = require('cors');
+const DriveTrainRoutes = require('./routes/drive-train.routes')
 const CityRoutes = require('./routes/city.routes');
 const BrandRoutes = require('./routes/brand.routes');
 const ColorRoutes = require('./routes/color.routes');
 const BodyTypeRoutes = require('./routes/body-type.routes');
 const FuelTypeRoutes = require('./routes/fuel-type.routes');
-const DriveTrainRoutes = require('./routes/drive-train.routes')
 const TransmissionRoutes = require('./routes//transmission.routes')
+const CarRoutes = require("./routes/car.routes")
 
-const mongoURI = process.env.MONGODB_URI;
+
 app.use(cors());
 app.use(express.json());
 
+const mongoURI = process.env.MONGODB_URI;
 mongoose.connect(mongoURI, {
     serverApi: {
         version: ServerApiVersion.v1,
@@ -36,6 +35,7 @@ app.use(BodyTypeRoutes)
 app.use(FuelTypeRoutes)
 app.use(DriveTrainRoutes)
 app.use(TransmissionRoutes)
+app.use(CarRoutes)
 
 
 
