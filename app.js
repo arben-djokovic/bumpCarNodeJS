@@ -12,6 +12,7 @@ const BrandRoutes = require('./routes/brand.routes');
 const ColorRoutes = require('./routes/color.routes');
 const BodyTypeRoutes = require('./routes/body-type.routes');
 const FuelTypeRoutes = require('./routes/fuel-type.routes');
+const DriveTrainRoutes = require('./routes/drive-train.routes')
 
 const mongoURI = process.env.MONGODB_URI;
 app.use(cors());
@@ -32,6 +33,7 @@ app.use(BrandRoutes)
 app.use(ColorRoutes)
 app.use(BodyTypeRoutes)
 app.use(FuelTypeRoutes)
+app.use(DriveTrainRoutes)
 
 
 
