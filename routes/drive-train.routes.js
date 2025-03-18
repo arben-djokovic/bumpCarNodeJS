@@ -1,5 +1,6 @@
-const express = require('express');
-const DriveTrain = require('../models/DriveTrain');
+import express from "express";
+import DriveTrain from "../models/DriveTrain.js";
+
 const router = express.Router();
 
 
@@ -36,4 +37,4 @@ router.delete("/drive-trains/:id", async(req, res) => {
 })
 
 
-module.exports = router;
+export default router

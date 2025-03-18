@@ -1,5 +1,6 @@
-const express = require('express');
-const City = require('../models/City');
+import express from "express";
+import City from "../models/City.js";
+
 const router = express.Router();
 
 router.get("/locations", async(req, res) => {
@@ -29,21 +30,12 @@ router.post("/locations", async(req, res) => {
 
 router.patch("/locations/:id", async(req, res) => {
     try{
-        const cityUpdate = await City.findByIdAndUpdate(
-            req.params.id, 
-            {
-                $set: {
-                    name: req.body.name,
-                    longitude: req.body.longitude,
-                    latitude: req.body.latitude
-                }
-            },
-            {
-                new: true,
-                omitUndefined: true,
-                runValidators: true
-            }
-        )
+        let updateFields = {}
+        if (req.body.name) updateFields.name = req.body.name
+        if (req.body.latitude) updateFields.latitude = req.body.latitude
+        if (req.body.longitude) updateFields.longitude = req.body.longitude
+
+        const cityUpdate = await City.findByIdAndUpdate(req.params.id, updateFields, {new: true})
         
         if (!cityUpdate) {
             return res.status(404).json({ message: "City not found" });
@@ -56,4 +48,4 @@ router.patch("/locations/:id", async(req, res) => {
     }
 })
 
-module.exports = router;
+export default router;

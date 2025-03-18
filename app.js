@@ -1,32 +1,31 @@
-const express = require('express');
-const { default: mongoose } = require('mongoose');
-require("dotenv").config()
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+
+import CityRoutes from "./routes/city.routes.js";
+import BrandRoutes from "./routes/brand.routes.js";
+import ColorRoutes from "./routes/color.routes.js";
+import BodyTypeRoutes from "./routes/body-type.routes.js";
+import FuelTypeRoutes from "./routes/fuel-type.routes.js";
+import DriveTrainRoutes from "./routes/drive-train.routes.js";
+import TransmissionRoutes from "./routes/transmission.routes.js";
+import CarRoutes from "./routes/car.routes.js";
+
+
 const app = express();
-const { ServerApiVersion } = require('mongodb');
-const cors = require('cors');
-const DriveTrainRoutes = require('./routes/drive-train.routes')
-const CityRoutes = require('./routes/city.routes');
-const BrandRoutes = require('./routes/brand.routes');
-const ColorRoutes = require('./routes/color.routes');
-const BodyTypeRoutes = require('./routes/body-type.routes');
-const FuelTypeRoutes = require('./routes/fuel-type.routes');
-const TransmissionRoutes = require('./routes//transmission.routes')
-const CarRoutes = require("./routes/car.routes")
 
 
 app.use(cors());
 app.use(express.json());
+dotenv.config();
 
-const mongoURI = process.env.MONGODB_URI;
-mongoose.connect(mongoURI, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true
-    }
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log('Error connecting to MongoDB:', err));
+const MONGODB_URI = process.env.MONGODB_URI;
+console.log(MONGODB_URI)
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.error("Error connecting to MongoDB", err));
 
 app.use(CityRoutes)
 app.use(BrandRoutes)

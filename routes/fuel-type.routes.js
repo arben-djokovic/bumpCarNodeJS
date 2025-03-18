@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const FuelType = require("../models/FuelType")
+import express from "express";
+import FuelType from "../models/FuelType.js";
 
+const router = express.Router();
 router.get("/fuel-types", async(req, res) => {
     try{
         const fuelTypes = await FuelType.find()
@@ -35,4 +35,4 @@ router.delete("/fuel-types/:id", async(req, res) => {
 })
 
 
-module.exports = router;
+export default router

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const bodyTypeSchema = new mongoose.Schema({
     name: {
@@ -12,4 +12,4 @@ const bodyTypeSchema = new mongoose.Schema({
 
 const BodyType = mongoose.model('BodyType', bodyTypeSchema);
 
-module.exports = BodyType;
+export default BodyType;

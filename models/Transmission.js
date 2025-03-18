@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const TransmissionSchema = new mongoose.Schema({
     name: {
@@ -12,4 +12,4 @@ const TransmissionSchema = new mongoose.Schema({
 
 const Transmission = mongoose.model('Transmission', TransmissionSchema);
 
-module.exports = Transmission;
+export default Transmission;

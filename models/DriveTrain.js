@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const driveTrainSchema = new mongoose.Schema({
     name: {
@@ -12,4 +12,4 @@ const driveTrainSchema = new mongoose.Schema({
 
 const DriveTrain = mongoose.model('DriveTrain', driveTrainSchema);
 
-module.exports = DriveTrain;
+export default DriveTrain;

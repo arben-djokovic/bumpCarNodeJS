@@ -1,5 +1,5 @@
-const express = require('express');
-const Color = require('../models/Color');
+import express from "express";
+import Color from "../models/Color.js";
 const router = express.Router();
 
 router.get("/colors", async(req, res) => {
@@ -35,4 +35,4 @@ router.delete("/colors/:id", async(req, res) => {
 })
 
 
-module.exports = router;
+export default router

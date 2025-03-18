@@ -1,5 +1,6 @@
-const express = require('express');
-const BodyType = require('../models/BodyType');
+import express from "express";
+import BodyType from "../models/BodyType.js";
+
 const router = express.Router();
 
 router.get("/body-types", async(req, res) => {
@@ -35,4 +36,4 @@ router.delete("/body-types/:id", async(req, res) => {
 })
 
 
-module.exports = router;
+export default router

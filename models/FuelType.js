@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const fuelTypeSchema = new mongoose.Schema({
     name: {
@@ -12,4 +12,4 @@ const fuelTypeSchema = new mongoose.Schema({
 
 const FuelType = mongoose.model('FuelType', fuelTypeSchema);
 
-module.exports = FuelType;
+export default FuelType;

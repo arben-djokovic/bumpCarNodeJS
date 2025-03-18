@@ -1,5 +1,5 @@
-const express = require('express');
-const Transmission = require('../models/Transmission');
+import express from "express";
+import Transmission from "../models/Transmission.js";
 const router = express.Router();
 
 router.get("/transmissions", async(req, res) => {
@@ -35,4 +35,4 @@ router.delete("/transmissions/:id", async(req, res) => {
 })
 
 
-module.exports = router;
+export default router
