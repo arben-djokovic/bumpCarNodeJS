@@ -21,7 +21,7 @@ app.use(express.json());
 dotenv.config();
 
 const MONGODB_URI = process.env.MONGODB_URI;
-console.log(MONGODB_URI)
+
 mongoose
   .connect(MONGODB_URI)
   .then(() => console.log("MongoDB connected successfully"))

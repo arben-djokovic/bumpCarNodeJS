@@ -12,11 +12,10 @@ const router = express.Router();
 router.get("/cars", async (req, res) => {
   try {
     const limit = req.query.limit ? parseInt(req.query.limit) : 10;
-    const { brand, city, body_type, color, fuel_type, transmission, drivetrain, seat_count, condition } = req.query;
+    const { location, maxprice, namesearch, brand, body_type, color, fuel_type, transmission, drivetrain, seat_count, condition } = req.query;
 
-    const filter = { condition }; // Base filter
+    const filter = { };
     
-    // Helper function to convert query params into an array
     const parseQueryArray = (value) => {
       return value ? value.split(",") : null;
     };
@@ -30,7 +29,7 @@ router.get("/cars", async (req, res) => {
     
     // Convert query params to arrays
     const brandArray = parseQueryArray(brand);
-    const cityArray = parseQueryArray(city);
+    const cityArray = parseQueryArray(location);
     const bodyTypeArray = parseQueryArray(body_type);
     const colorArray = parseQueryArray(color);
     const fuelTypeArray = parseQueryArray(fuel_type);
@@ -46,7 +45,7 @@ router.get("/cars", async (req, res) => {
       colorIds,
       fuelTypeIds,
       transmissionIds,
-      drivetrainIds,
+      drivetrainIds
     ] = await Promise.all([
       getFieldIds(Brand, brandArray),
       getFieldIds(City, cityArray),
@@ -65,8 +64,11 @@ router.get("/cars", async (req, res) => {
     if (fuelTypeIds) filter.fuel_type = { $in: fuelTypeIds };
     if (transmissionIds) filter.transmission = { $in: transmissionIds };
     if (drivetrainIds) filter.drivetrain = { $in: drivetrainIds };
-    if (seatCountArray) filter.passenger_capacity = { $in: seatCountArray }; // Handle numeric filtering
-    
+    if (seatCountArray) filter.passenger_capacity = { $in: seatCountArray }; 
+    if (condition) filter.condition = condition;
+    if (namesearch) filter.title = { $regex: namesearch, $options: "i" };
+    if (maxprice) filter.price = { $lte: maxprice };
+
     // Fetch cars with filters and populate fields
     const cars = await Car.find(filter)
       .limit(limit)
@@ -77,7 +79,7 @@ router.get("/cars", async (req, res) => {
       .populate("fuel_type")
       .populate("transmission")
       .populate("drivetrain");
-    
+
     res.json(cars);
   } catch (err) {
     console.log(err);
