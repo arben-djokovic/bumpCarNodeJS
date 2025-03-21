@@ -11,6 +11,7 @@ import FuelTypeRoutes from "./routes/fuel-type.routes.js";
 import DriveTrainRoutes from "./routes/drive-train.routes.js";
 import TransmissionRoutes from "./routes/transmission.routes.js";
 import CarRoutes from "./routes/car.routes.js";
+import UserRoutes from "./routes/user.routes.js";
 
 
 const app = express();
@@ -35,6 +36,7 @@ app.use(FuelTypeRoutes)
 app.use(DriveTrainRoutes)
 app.use(TransmissionRoutes)
 app.use(CarRoutes)
+app.use(UserRoutes)
 
 
 

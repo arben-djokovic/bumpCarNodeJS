@@ -72,6 +72,11 @@ const carSchema = new mongoose.Schema({
         ref: 'Transmission',
         required: true 
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     drivetrain: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'DriveTrain',
