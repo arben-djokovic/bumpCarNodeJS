@@ -48,4 +48,28 @@ router.get("/user/me", async(req, res) => {
     }
 })
 
+router.delete("/user/me", async(req, res) => {
+    try{
+        const token = req.headers.authorization.split(" ")[1]
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        const user = await User.findByIdAndDelete(decoded.id)
+        res.json({success: true, user})
+    }catch(err){
+        res.status(500).json({ success: false, message: "Error", error: err.message });
+        console.log(err)
+    }
+})
+
+router.put("/user/me", async(req, res) => {
+    try{
+        const token = req.headers.authorization.split(" ")[1]
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        const user = await User.findByIdAndUpdate(decoded.id, req.body, { new: true })
+        res.json(user)
+    }catch(err){
+        res.status(500).json({ success: false, message: "Error", error: err.message });
+        console.log(err)
+    }
+})
+
 export default router

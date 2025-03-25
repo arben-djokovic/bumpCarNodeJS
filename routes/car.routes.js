@@ -105,6 +105,7 @@ router.post("/cars", async (req, res) => {
 
   const getIdFromToken = () => {
     const token = req.headers.authorization.split(" ")[1];
+    if(token === undefined) return res.status(401).json({ message: "Unauthorized" });
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     return decoded.id;
   }
@@ -145,10 +146,10 @@ router.post("/cars", async (req, res) => {
 
 router.get("/cars/mine", async (req, res) => {
   const token = req.headers.authorization.split(" ")[1];
+  if(token === undefined) return res.status(401).json({ message: "Unauthorized" });
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   const userId = decoded.id;
   if(!ObjectId.isValid(userId)) return res.status(400).json({ success: false, message: "Invalid user" });
-  console.log(userId)
   try {
     const cars = await Car.find({ user: userId })
       .populate("city")
@@ -186,6 +187,21 @@ router.get("/cars/:id", async (req, res) => {
   }
 });
 
+
+router.delete("/cars/:id", async (req, res) => {
+  const token = req?.headers?.authorization?.split(" ")[1];
+  if(token === undefined) return res.status(401).json({ message: "Unauthorized" });
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const userId = decoded.id;
+  try {
+    const car = await Car.findOneAndDelete({ _id: req.params.id, user: userId });
+    if (!car) return res.status(404).json({ message: "Car not found" });
+    res.json(car);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Error", error: err.message });
+  }
+})
 
 
 export default router;
